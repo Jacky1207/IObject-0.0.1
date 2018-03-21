@@ -20,7 +20,7 @@ namespace IObject
 			virtual ~IList();
 
 			//return size of list.
-			int size();
+			int size()	const;
 			//push item
 			void append(const T value);
 			void append(const IList<T> &value);
@@ -172,7 +172,7 @@ namespace IObject
 		}
 		
 		//return size of list.
-		template <class T>	int IList<T>::size()
+		template <class T>	int IList<T>::size() const
 		{
 			return _size;
 		}
