@@ -447,14 +447,14 @@ namespace IObject
 		IString &IString::setNum(long long n, int base)
 		{
 			char str[32] = {0};
-			sprintf(str, "%ld", n);
+			sprintf(str, "%lld", n);
 			*this = IString(str);
 			return *this;
 		}
 		IString &IString::setNum(unsigned long long n, int base)
 		{
 			char str[32] = {0};
-			sprintf(str, "%ld", n);
+			sprintf(str, "%lld", n);
 			*this = IString(str);
 			return *this;
 		}

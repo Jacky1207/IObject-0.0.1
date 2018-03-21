@@ -1,18 +1,21 @@
 #pragma once
 
 #include <string>
-#define sg_void_t	void
-#define sg_bool_t	bool
-#define sg_char_t	char
-#define sg_uchar_t	unsigned char
-#define sg_int16_t	short
-#define sg_int32_t	int
-#define sg_uint16_t unsigned short
-#define sg_uint32_t unsigned int
-#define sg_long_t	long
-#define sg_ulong_t  unsigned long
-#define sg_longlong_t long long
-#define sg_string_t	std::string
+
+typedef void sg_void_t;
+typedef bool sg_bool_t;	
+typedef char sg_int8_t;	
+typedef char sg_char_t;
+typedef unsigned char sg_uchar_t;
+typedef unsigned char sg_uint8_t;	
+typedef short sg_int16_t;
+typedef int sg_int32_t;
+typedef unsigned short sg_uint16_t; 
+typedef unsigned int sg_uint32_t; 
+typedef long sg_long_t;	
+typedef unsigned long sg_ulong_t;  
+typedef long long sg_longlong_t;
+typedef	std::string sg_string_t;
 
 #if defined(_WIN32) || defined(_WIN64)
 #else
