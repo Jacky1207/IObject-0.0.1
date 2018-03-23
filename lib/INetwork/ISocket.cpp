@@ -20,7 +20,7 @@ namespace IObject
 			if (_nSocket >= 0)
 				shutdown(_nSocket,SHUT_RDWR);
 
-			LOG_WRITE(NETWORK, ISystemBase::LOG_INFO, "~ISocket");
+			LOG_WRITE(NETWORK, LOG_INFO, "~ISocket");
 		}
 
 		sg_int32_t ISocket::initSocket(SocketType type)

@@ -19,6 +19,7 @@
 #include "IThread.h"
 #include "IList.h"
 #include "IMutex.h"
+#include <list>
 
 namespace IObject
 {

@@ -1,5 +1,6 @@
 #include "IConnection.h"
 #include "ILog.h"
+#include "typedef.h"
 
 namespace IObject
 {
@@ -20,7 +21,7 @@ namespace IObject
 			}
 			m_nSocketList.clear();
 			
-			LOG_WRITE(NETWORK, ISystemBase::LOG_INFO, "~IConnection");
+			LOG_WRITE(NETWORK, LOG_INFO, "~IConnection");
 		}
 
 		sg_void_t IConnection::setSocket(const remote_info nSocket)

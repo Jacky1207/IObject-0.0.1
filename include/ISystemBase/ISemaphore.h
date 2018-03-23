@@ -32,7 +32,10 @@ namespace IObject
 		{
 		public :
 			ISemaphore();
+			ISemaphore(const int key);
 			~ISemaphore();
+
+			void setKeyValue(const int key){_key = key;}
 			
 			void initSemaphore();
 			void deleteSemaphore();
@@ -42,6 +45,7 @@ namespace IObject
 
 		private:
 			int _semap;	
+			int _key;
 		};
 	}
 }

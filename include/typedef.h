@@ -40,13 +40,25 @@ namespace IObject
 #define ITHREAD			"Thread"
 #define ISERIAL			"Serial"
 
+#define		LOG_TERMINAL
+#define		LOG_FILE
+
 	enum CaseSensitivity
 	{
 		CaseInsensitive = 0,
 		CaseSensitive = 1
 	};
-	
-	
+	namespace ISystemBase
+	{
+		enum LOG_LEVEL
+		{
+			LOG_SYSTEM = 0,
+			LOG_ERROR,
+			LOG_WARNING,
+			LOG_INFO,
+			LOG_DEBUG
+		};
+	}
 }
 
 #define SEGBASE_API

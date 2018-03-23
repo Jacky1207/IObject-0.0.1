@@ -25,6 +25,7 @@ namespace IObject
 		{
 		public :
 			IShared();
+			IShared(const int key);
 			~IShared();
 			
 			void initShared(const sg_uint32_t size);
@@ -41,6 +42,7 @@ namespace IObject
 			int 	_share;				//shared buff handle
 			void 	*shm_addr;			//addr of shared buff
 			_Shared *shared;			//shm_addr
+			int		_key;
 			
 			ISemaphore _semphore;
 		};

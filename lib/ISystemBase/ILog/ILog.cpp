@@ -43,6 +43,7 @@ namespace IObject
 
 		void ILog::writeLog(const IString module, int level, IString format, ...)
 		{
+			printf("3---------------------\n");
 			if (level > getConfigLogLevel())
 				return;
 			
@@ -60,23 +61,20 @@ namespace IObject
 			case LOG_SYSTEM:
 				break;
 			case LOG_ERROR:
-//				_interface = ILogError::getInstance();
+				_interface = ILogError::getInstance();
 				break;
 			case LOG_WARNING:
-//				_interface = ILogWarn::getInstance();
+				_interface = ILogWarn::getInstance();
 				break;
 			case LOG_INFO:
 				break;
 			case LOG_DEBUG:
-				printf("3---------------------\n");
 				_interface = ILogDebug::getInstance();
 				break;
 			}
 
-			printf("4---------------------\n");
 			char prin[MAX_LOG_LEN] = { 0 };
 			IString time = getCurrentTime();
-			printf("5---------------------\n");
 			snprintf(prin, sizeof(prin)-1, "[%s][%s]:%s\r\n", time.data(), module.data(), buff);
 
 			printf("write log %s\n", prin);

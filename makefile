@@ -31,7 +31,7 @@ OBJDUMP			= $(CROSS_COMPILE)objdump
 
 export ARCH AS LD CC CPP CXX AR NM STRIP OBJCOPY OBJDUMP
 	
-exclude_dirs= build include
+exclude_dirs= build include sourceInsight
 project_dirs = src
 
 #didn't modify,but remove -g if didn't need debug information

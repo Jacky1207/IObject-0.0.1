@@ -27,7 +27,9 @@ namespace IObject
 			if(m_nSocket < 0)
 				LOG_WRITE(NETWORK ,LOG_ERROR, "init socket error: %d",ISocket::getSocketError());
 				
+			printf("--------s----\n");
 			LOG_WRITE(NETWORK ,LOG_DEBUG, "init socket succes: %d",m_nSocket);
+			printf("--------n----\n");
 			return m_nSocket;
 		}
 		

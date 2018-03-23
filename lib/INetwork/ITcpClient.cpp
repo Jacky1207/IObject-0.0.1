@@ -11,6 +11,7 @@ namespace IObject
 				_isReconnect(false),
 				_pTimer(NULL)
 		{
+			printf("8888888888\n");
 			_pSocket = new ITcpSocket();
 		}
 		

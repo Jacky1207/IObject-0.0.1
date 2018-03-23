@@ -126,7 +126,9 @@ int main(int argc,char *argv[])
 	
 	printf("size %d\n", pList.size());
 #endif
+	printf("1------\n");
 	TcpClient tcp;
+	printf("2------\n");
 	tcp.connectTcpServer("192.125.155.117",55555);
 
 	char buff[24] = {0};

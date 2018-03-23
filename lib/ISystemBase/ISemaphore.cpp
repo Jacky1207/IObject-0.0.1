@@ -4,9 +4,15 @@ namespace IObject
 {
 	namespace ISystemBase
 	{
-		ISemaphore::ISemaphore()
+		ISemaphore::ISemaphore() 
+			: _semap(-1), _key(KEY_VALUE)
 		{
-			_semap = -1;
+			
+		}
+
+		ISemaphore::ISemaphore(const int key)
+			: _semap(-1), _key(key)
+		{
 		}
 		
 		ISemaphore::~ISemaphore()
@@ -15,7 +21,7 @@ namespace IObject
 		
 		void ISemaphore::initSemaphore()
 		{
-			_semap = semget((key_t)KEY_VALUE, 1, 0666 | IPC_CREAT);
+			_semap = semget((key_t)_key, 1, 0666 | IPC_CREAT);
 			if(_semap < 0)
 				fprintf(stderr, "Failed to semget semaphore\n");
 			if(setSemvalue() != 0)

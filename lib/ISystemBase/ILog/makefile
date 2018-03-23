@@ -14,7 +14,5 @@
 #project_dirs   variable indicates which directory is project directory
 #AutoNeedAppLib	add the library that can auto AR when this lib modify 
 
-exclude_dirs= lib-master ILog
-LIB = libsystembase.a
 
 include $(MAKEFILELIB)

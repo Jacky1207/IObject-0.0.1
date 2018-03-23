@@ -5,10 +5,14 @@ namespace IObject
 {
 	namespace ISystemBase
 	{
-		IShared::IShared()
+		IShared::IShared() : 
+			_key(KEY_VALUE)
 		{
-//			shared->shared_buff = NULL;
-//			shared->leng = 0;
+		}
+
+		IShared::IShared(const int key) :
+			_key(key)
+		{
 		}
 		
 		IShared::~IShared()
@@ -18,7 +22,7 @@ namespace IObject
 		
 		void IShared::initShared(const sg_uint32_t size)
 		{			
-			_share= shmget((key_t)KEY_VALUE, sizeof(size+4), 0666 | IPC_CREAT);
+			_share= shmget((key_t)_key, sizeof(size+4), 0666 | IPC_CREAT);
 			if(_share < 0)
 				fprintf(stderr, "shmget failed\n");
 			

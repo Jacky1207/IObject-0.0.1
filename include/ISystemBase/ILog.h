@@ -1,80 +1,37 @@
-#pragma once
+#ifndef _ILOG_H_
+#define _ILOG_H_
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <time.h>
-#include <sys/stat.h>
-#include <list>
-
-#include "typedef.h"
-#include "IMutex.h"
-#include "IRunable.h"
-#include "IThread.h"
+#include "ILogInterface.h"
+#include "IString.h"
+#include "ILogError.h"
+#include "ILogDebug.h"
+#include "ILogWarn.h"
 
 namespace IObject
 {
-//#define DEBUG
-#ifdef DEBUG
-	#define LOG_WRITE(mode,level,format,...)  ISystemLog::getInstance()->writeLog(mode,level,"[%d](%s):" format,__LINE__,__FUNCTION__,##__VA_ARGS__)
-#else 
-	#define LOG_WRITE(mode,level,format,...)
-#endif
 	namespace ISystemBase
 	{
-		enum LOG_LEVEL
-		{
-			LOG_SYSTEM = 0,
-			LOG_ERROR,
-			LOG_WARNING,
-			LOG_INFO,
-			LOG_DEBUG,
-			LOG_HIDE
-		};
-
-#define MAX_LOG_LEN		( 10 * 1024 )
-#define MAX_LOG_SIZE	( 10 * 1024 * 1024 )
-
-		class ILogImpl 
+	#if 1
+		#define LOG_WRITE(mode,level,format,...)  ILog::getInstance()->writeLog(mode,level,"[%d](%s):" format,__LINE__,__FUNCTION__,##__VA_ARGS__)
+	#else
+		#define LOG_WRITE(mode,level,format,...) 
+	#endif
+		class ILog
 		{
 		public:
-			ILogImpl();
-			virtual ~ILogImpl();
+			ILog();
+			~ILog();
+			static ILog *getInstance();
 
-			virtual void writeLogImpl( const char* strLog, int len);
-			void setLogPathImpl(std::string strPath){ m_strPath = strPath; }
-			virtual std::string getCurrentTime();
+			void writeLog(const IString module, int level, IString format, ...);
 		private:
-			FILE *m_pFile;
-			sg_string_t m_strFileName;
-			sg_string_t m_strPath;
+			ILogInterface * _interface;
+			inline int getConfigLogLevel(){return LOG_DEBUG;}
+			IString getCurrentTime();
 
-			FILE *getCurrentLogHandle();
-			long getFileSize(const std::string fileName);
-			void resetFileHandle();
+			static ILog *_pLogHandle;
 		};
-
-
-		class ISystemLog : virtual public ILogImpl, virtual public IRunable
-		{
-		public:
-			ISystemLog();
-			virtual ~ISystemLog();
-
-			static ISystemLog* getInstance();
-			virtual void writeLog(std::string module, int level, const std::string strLog, ...);
-			virtual void setLogPath(const std::string strPath){ setLogPathImpl(strPath); }
-
-			virtual void run();
-			virtual void stop(){ isActive = false; }
-		private:
-			bool isActive;
-			std::list <std::string >m_strLogList;
-			std::string getFirstLog();
-			int getConfigLogLevel();
-
-			IMutex m_pLock;
-			IThread _pThread;
-		};
-
 	}
 }
+
+#endif
