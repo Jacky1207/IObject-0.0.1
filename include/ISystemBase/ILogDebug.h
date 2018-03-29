@@ -19,7 +19,7 @@ namespace IObject
 			static ILogInterface *getInstance();
 		private:
 			ILogModule _module;
-			static ILogDebug *_pDebug;
+			static ILogInterface *_pDebug;
 		};
 	}
 }

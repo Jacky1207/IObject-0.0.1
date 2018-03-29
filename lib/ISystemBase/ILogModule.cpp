@@ -15,7 +15,7 @@ namespace IObject
 		#endif
 
 		#ifdef LOG_TERMINAL
-			printf("2************\n");
+//			printf("2************\n");
 			p = new ILogTerminal();
 			_pLogModule.append(p);
 		#endif

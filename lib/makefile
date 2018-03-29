@@ -13,5 +13,6 @@
 #exclude_dirs   variable indicates this directory didn't need build,for example 'include' or 'build'
 #project_dirs   variable indicates which directory is project directory
 #AutoNeedAppLib	add the library that can auto AR when this lib modify  
+exclude_dirs = log++
 
 include $(MAKEFILELIB)
