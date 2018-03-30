@@ -28,8 +28,8 @@ LogModule *LogModule::getInstance()
 
 void LogModule::appendLogMessage(const log::Level &level,const std::string &msg)
 {
-	_log_level = level;
-	_pList.push_back(msg);
+	LogInformation p(level, msg);
+	_pList.push_back(p);
 }
 
 void *LogModule::log_dispose_thread(void *param)
@@ -37,17 +37,38 @@ void *LogModule::log_dispose_thread(void *param)
 	LogModule *pLog = (LogModule* )param;
 	while(_is_thread_active)
 	{
-		switch(_log_level)
+		usleep(_thread_sleep_time);
+		if(_pList.size() > 0)
 		{
-			case log::Level::Debug:
+			LogInformation plog = _pList.front();
+			_pList.pop_front();
+
+			_ptr_configeration.getInformation();
+			log::Level level = _ptr_configeration.getConfigLevel();
+			log::Output out  = _ptr_configeration.getConfigOutput();
+
+			if((CastEnum::castToInt(level) < CastEnum::castToInt(plog.getLogLevel))
+				continue;
+			if(CastEnum::castToInt(out) & CastEnum::castToInt(log::Output::OutputFile) != 0)
+			{
 				LogFile log;
+				log.writeMsgToFile(level, );
+			}
+			if(CastEnum::castToInt(out) & CastEnum::castToInt(log::Output::OutputTerminal) != 0)
+			{
+				LogTerminal log;
 				log.writeMsgToFile();
-				break;
-			case log::Level::Info:
-				break;
-			case log::Level::Error:
-				break;
+			}
+			if(CastEnum::castToInt(out) & CastEnum::castToInt(log::Output::OutputTcpServer) != 0)
+			{
+				LogTcpServer log;
+				log.writeMsgToFile();
+			}
+			if(CastEnum::castToInt(out) & CastEnum::castToInt(log::Output::OutputHtml) != 0)
+			{
+				LogHtml log;
+				log.writeMsgToFile();
+			}
 		}
-		usleep(100 *1000 *1000);
 	}
 }

@@ -8,12 +8,13 @@ namespace log{
 class LogDebug
 {
 public;
-	LogDebug(const log::Level &level, const std::string &msg, ...);
+	LogDebug();
 	virtual ~LogDebug();
 
+	void format(std::string &msg, ...);
 private:
-	log::level m_level;
-	
+	const log::Level m_level = log::Level::Debug;
+	const std::string _type = "debug"; 
 };
 
 }

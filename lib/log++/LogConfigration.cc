@@ -2,10 +2,11 @@
 #include <dir.h>
 #include <sys/stat.h>
 #include <uninstd.h>
+#include <string.h>
 
 namespace log{
 
-std::string& DateTime::getDateTimeInfo()
+std::string DateTime::getDateTimeInfo()
 {
 	time_t timer = time(NULL);
 	struct tm  *p = localtime(&timer);
@@ -66,12 +67,25 @@ int File::writeMsgIntoFile(const std::string &logmsg, const FILE* stream)
 	return ret;
 }
 
+int File::getFileLine(const FILE* stream, char* line)
+{
+	return fgets(line, kmax_file_line, stream);
+}
+
 void Configeration::ConfigInformation::getConfigerationInfo(const std::string &filename, Configeration *pConf)
 {
 	_file = File::createFileHandle(filename);
 	if(_file == NULL)	return;
 
+	while(1)
+	{
+		char buff[kmax_file_line+1] = {0};
+		int len = File::getFileLine(_file, buff);
+		if(len < 0)
+			break;
 
+		char *type = strtok(buff, "=");
+	}
 }
 
 }

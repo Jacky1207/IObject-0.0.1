@@ -13,12 +13,34 @@ enum class Level
 	Unknown = 0xff
 };
 
-#define LOG(level, )	Log##level().
+/*
+ *	enum for log output way.
+ */
+enum class Output
+{
+	OutputFile	   = 0x1,
+	OutputTerminal = 0x2,
+	OutputTcpServer= 0x4,
+	OutputHtml	   = 0x8,
+	Unknown		   = 0xff
+};
 
-class CreateLogHandle
+/*
+ *	cast enum to int
+ */
+template <typename T>
+class CastEnum
 {
 public:
-	static 
+	static int castToInt(T t){ return static_cast<int>(t); }
+};
+
+#define LOG(level, msg, ...)	Log##level().format(msg, ...)
+static const MAX_LOG_LEN = 2048;
+
+class Log
+{
+public:
 };
 
 }
